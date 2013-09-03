@@ -12,7 +12,7 @@
 
 <p>
   <strong>Brewery:</strong>
-  <%= @tea.brewery_id %>
+  <%= link_to @tea.brewery.name, @tea.brewery %>
 </p>
 
 <%= link_to 'Edit', edit_tea_path(@tea) %> |
