@@ -1,5 +1,16 @@
 class TeasController < ApplicationController
+
   before_action :set_tea, only: [:show, :edit, :update, :destroy]
+
+  private
+
+  def varieties
+
+    [ 'Black tea', 'Green tea', 'Oolong tea', 'White tea' ]
+
+  end
+
+  public
 
   # GET /teas
   # GET /teas.json
@@ -17,7 +28,7 @@ class TeasController < ApplicationController
 
     @tea = Tea.new
     @breweries = Brewery.all
-    @varities = [ 'Black tea', 'Green tea', 'Oolong tea', 'White tea' ]
+    @varieties = varieties
 
   end
 
@@ -25,6 +36,7 @@ class TeasController < ApplicationController
   def edit
 
     @breweries = Brewery.all
+    @varieties = varieties
 
   end
 
