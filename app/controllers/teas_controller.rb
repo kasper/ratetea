@@ -23,6 +23,9 @@ class TeasController < ApplicationController
 
   # GET /teas/1/edit
   def edit
+
+    @breweries = Brewery.all
+
   end
 
   # POST /teas
@@ -46,15 +49,17 @@ class TeasController < ApplicationController
   # PATCH/PUT /teas/1
   # PATCH/PUT /teas/1.json
   def update
+
     respond_to do |format|
       if @tea.update(tea_params)
-        format.html { redirect_to @tea, notice: 'Tea was successfully updated.' }
+        format.html { redirect_to(teas_path) }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
         format.json { render json: @tea.errors, status: :unprocessable_entity }
       end
     end
+
   end
 
   # DELETE /teas/1
