@@ -1,0 +1,19 @@
+<h1>Create new rating</h1>
+
+<%= form_for(@rating) do |f| %>
+
+  <div class='field'>
+    <%= f.label :tea_id %><br>
+    <%= f.select :tea_id, options_from_collection_for_select(@teas, :id, :to_s) %>
+  </div>
+
+  <div class='field'>
+    <%= f.label :score %><br>
+    <%= f.number_field :score %>
+  </div>
+
+  <div class='actions'>
+    <%= f.submit %>
+  </div>
+
+<% end %>

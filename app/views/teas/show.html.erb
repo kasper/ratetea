@@ -15,5 +15,13 @@
   <%= link_to @tea.brewery.name, @tea.brewery %>
 </p>
 
+<p>
+  <% if @tea.ratings.empty? %>
+    Tea has not yet been rated!
+  <% else %>
+    Tea has <%= pluralize(@tea.ratings.size, 'rating') %> with an average of <%= @tea.average_rating %>.
+  <% end %>
+</p>
+
 <%= link_to 'Edit', edit_tea_path(@tea) %> |
 <%= link_to 'Back', teas_path %>

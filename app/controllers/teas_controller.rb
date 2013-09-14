@@ -14,7 +14,11 @@ class TeasController < ApplicationController
 
   # GET /teas/new
   def new
+
     @tea = Tea.new
+    @breweries = Brewery.all
+    @varities = [ 'Black tea', 'Green tea', 'Oolong tea', 'White tea' ]
+
   end
 
   # GET /teas/1/edit
@@ -24,17 +28,19 @@ class TeasController < ApplicationController
   # POST /teas
   # POST /teas.json
   def create
+
     @tea = Tea.new(tea_params)
 
     respond_to do |format|
       if @tea.save
-        format.html { redirect_to @tea, notice: 'Tea was successfully created.' }
+        format.html { redirect_to(teas_path) }
         format.json { render action: 'show', status: :created, location: @tea }
       else
         format.html { render action: 'new' }
         format.json { render json: @tea.errors, status: :unprocessable_entity }
       end
     end
+
   end
 
   # PATCH/PUT /teas/1

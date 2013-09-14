@@ -1,5 +1,23 @@
 class BreweriesController < ApplicationController
+
+  before_filter :authenticate, :only => [ :new, :create, :destroy ]
   before_action :set_brewery, only: [:show, :edit, :update, :destroy]
+
+  private
+
+  def authenticate
+
+    admin_accounts = { 'admin' => 'secret', 'kasper' => 'repsak' }
+
+    authenticate_or_request_with_http_basic do |username, password|
+
+      admin_accounts[username] == password
+
+    end
+
+  end
+
+  public
 
   # GET /breweries
   # GET /breweries.json

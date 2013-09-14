@@ -1,0 +1,20 @@
+2.0.0p247 :007 > Brewery
+ => Brewery(id: integer, name: string, year: integer, created_at: datetime, updated_at: datetime)
+2.0.0p247 :008 > brewery = Brewery.create(:name => 'British Brewery', :year => 2007)
+   (0.1ms)  begin transaction
+  SQL (0.6ms)  INSERT INTO "breweries" ("created_at", "name", "updated_at", "year") VALUES (?, ?, ?, ?)  [["created_at", Sat, 14 Sep 2013 09:15:23 UTC +00:00], ["name", "British Brewery"], ["updated_at", Sat, 14 Sep 2013 09:15:23 UTC +00:00], ["year", 2007]]
+   (2.1ms)  commit transaction
+ => #<Brewery id: 5, name: "British Brewery", year: 2007, created_at: "2013-09-14 09:15:23", updated_at: "2013-09-14 09:15:23">
+2.0.0p247 :009 > Tea
+ => Tea(id: integer, name: string, variety: string, brewery_id: integer, created_at: datetime, updated_at: datetime)
+2.0.0p247 :010 > brewery.teas.create(:name => 'Earl Grey', :variety => 'Black Tea')
+   (0.2ms)  begin transaction
+  SQL (0.6ms)  INSERT INTO "teas" ("brewery_id", "created_at", "name", "updated_at", "variety") VALUES (?, ?, ?, ?, ?)  [["brewery_id", 5], ["created_at", Sat, 14 Sep 2013 09:17:20 UTC +00:00], ["name", "Earl Grey"], ["updated_at", Sat, 14 Sep 2013 09:17:20 UTC +00:00], ["variety", "Black Tea"]]
+   (3.2ms)  commit transaction
+ => #<Tea id: 11, name: "Earl Grey", variety: "Black Tea", brewery_id: 5, created_at: "2013-09-14 09:17:20", updated_at: "2013-09-14 09:17:20">
+2.0.0p247 :011 > brewery.teas.create(:name => 'English Breakfast', :variety => 'Black Tea')
+   (0.1ms)  begin transaction
+  SQL (0.5ms)  INSERT INTO "teas" ("brewery_id", "created_at", "name", "updated_at", "variety") VALUES (?, ?, ?, ?, ?)  [["brewery_id", 5], ["created_at", Sat, 14 Sep 2013 09:17:49 UTC +00:00], ["name", "English Breakfast"], ["updated_at", Sat, 14 Sep 2013 09:17:49 UTC +00:00], ["variety", "Black Tea"]]
+   (3.0ms)  commit transaction
+ => #<Tea id: 12, name: "English Breakfast", variety: "Black Tea", brewery_id: 5, created_at: "2013-09-14 09:17:49", updated_at: "2013-09-14 09:17:49">
+2.0.0p247 :012 >
