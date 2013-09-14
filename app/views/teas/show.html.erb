@@ -17,9 +17,9 @@
 
 <p>
   <% if @tea.ratings.empty? %>
-    Tea has not yet been rated!
+    No ratings.
   <% else %>
-    Tea has <%= pluralize(@tea.ratings.size, 'rating') %> with an average of <%= @tea.average_rating %>.
+    <%= pluralize(@tea.ratings.size, 'rating') %> with an average of <%= @tea.average_rating %>.
   <% end %>
 </p>
 
