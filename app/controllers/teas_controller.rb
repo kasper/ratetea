@@ -2,16 +2,6 @@ class TeasController < ApplicationController
 
   before_action :set_tea, only: [:show, :edit, :update, :destroy]
 
-  private
-
-  def varieties
-
-    [ 'Black tea', 'Green tea', 'Oolong tea', 'White tea' ]
-
-  end
-
-  public
-
   # GET /teas
   # GET /teas.json
   def index
@@ -85,6 +75,13 @@ class TeasController < ApplicationController
   end
 
   private
+
+    def varieties
+
+      [ 'Black tea', 'Green tea', 'Oolong tea', 'White tea' ]
+
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_tea
       @tea = Tea.find(params[:id])
@@ -94,4 +91,5 @@ class TeasController < ApplicationController
     def tea_params
       params.require(:tea).permit(:name, :variety, :brewery_id)
     end
+
 end

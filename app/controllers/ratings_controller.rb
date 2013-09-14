@@ -1,15 +1,5 @@
 class RatingsController < ApplicationController
 
-  private
-
-  def rating_params
-
-    params.require(:rating).permit(:tea_id, :score)
-
-  end
-
-  public
-
   def index
 
     @ratings = Rating.all
@@ -39,5 +29,13 @@ class RatingsController < ApplicationController
     redirect_to(ratings_path)
 
   end
+
+  private
+
+    def rating_params
+
+      params.require(:rating).permit(:tea_id, :score)
+
+    end
 
 end
