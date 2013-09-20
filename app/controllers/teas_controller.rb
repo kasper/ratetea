@@ -35,6 +35,8 @@ class TeasController < ApplicationController
   def create
 
     @tea = Tea.new(tea_params)
+    @breweries = Brewery.all
+    @varieties = varieties
 
     respond_to do |format|
       if @tea.save
@@ -51,6 +53,9 @@ class TeasController < ApplicationController
   # PATCH/PUT /teas/1
   # PATCH/PUT /teas/1.json
   def update
+
+    @breweries = Brewery.all
+    @varieties = varieties
 
     respond_to do |format|
       if @tea.update(tea_params)

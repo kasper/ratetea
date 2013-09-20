@@ -4,9 +4,9 @@ class SessionsController < ApplicationController
 
     user = User.find_by_username(params[:username])
 
-    if user.nil?
+    if user.nil? or not user.authenticate(params[:password])
 
-      redirect_to(:back, :notice => "User #{params[:username]} does not exist!")
+      redirect_to(:back, :notice => "Username or password do not match.")
 
     else
 
