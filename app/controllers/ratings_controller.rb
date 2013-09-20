@@ -15,7 +15,8 @@ class RatingsController < ApplicationController
 
   def create
 
-    Rating.create(rating_params)
+    rating = Rating.create(rating_params)
+    current_user.ratings << rating
 
     redirect_to(ratings_path)
 
@@ -26,7 +27,7 @@ class RatingsController < ApplicationController
     rating = Rating.find(params[:id])
     rating.delete
 
-    redirect_to(ratings_path)
+    redirect_to(:back)
 
   end
 

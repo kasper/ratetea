@@ -2,9 +2,17 @@ Ratetea::Application.routes.draw do
 
   root 'breweries#index'
 
-  resources :teas
+  resources :users, :teas, :breweries
 
-  resources :breweries
+  # Session
+
+  resources :sessions, :only => [ :new, :create, :destroy ]
+
+  # Users
+
+  get 'signup' => 'users#new'
+  get 'login' => 'sessions#new'
+  delete 'logout' => 'sessions#destroy'
 
   # Ratings
 

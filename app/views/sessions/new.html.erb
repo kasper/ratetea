@@ -1,0 +1,8 @@
+<h1>Login</h1>
+
+<p id='notice'><%= notice %></p>
+
+<%= form_tag sessions_path do %>
+  <%= text_field_tag :username, params[:username] %>
+  <%= submit_tag 'Login' %>
+<% end %>

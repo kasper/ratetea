@@ -12,5 +12,13 @@
   <% end %>
 </ul>
 
+<p>
+  <% if @brewery.ratings.empty? %>
+    No ratings.
+  <% else %>
+    <%= pluralize(@brewery.ratings.size, 'rating') %> with an average of <%= @brewery.average_rating %>.
+  <% end %>
+</p>
+
 <%= link_to 'Edit', edit_brewery_path(@brewery) %> |
 <%= link_to 'Back', breweries_path %>
