@@ -12,14 +12,16 @@
   <%= @tea_club.city %>
 </p>
 
-<h2>Members</h2>
-
 <% unless @tea_club.members.empty? %>
+
+  <h2>Members</h2>
+
   <ul>
     <% @tea_club.members.each do |member| %>
       <li><%= link_to member.username, user_path(member) %></li>
     <% end %>
   </ul>
+
 <% end %>
 
 <%= link_to 'Edit', edit_tea_club_path(@tea_club) %> |
