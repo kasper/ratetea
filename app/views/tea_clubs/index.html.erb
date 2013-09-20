@@ -1,0 +1,31 @@
+<h1>Listing tea clubs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Founded</th>
+      <th>City</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tea_clubs.each do |tea_club| %>
+      <tr>
+        <td><%= tea_club.name %></td>
+        <td><%= tea_club.founded %></td>
+        <td><%= tea_club.city %></td>
+        <td><%= link_to 'Show', tea_club %></td>
+        <td><%= link_to 'Edit', edit_tea_club_path(tea_club) %></td>
+        <td><%= link_to 'Destroy', tea_club, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Tea club', new_tea_club_path %>

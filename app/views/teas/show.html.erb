@@ -15,13 +15,11 @@
   <%= link_to @tea.brewery.name, @tea.brewery %>
 </p>
 
-<p>
-  <% if @tea.ratings.empty? %>
-    No ratings.
-  <% else %>
-    <%= pluralize(@tea.ratings.size, 'rating') %> with an average of <%= @tea.average_rating %>.
-  <% end %>
-</p>
+<% if @tea.ratings.empty? %>
+  <p>No ratings.</p>
+<% else %>
+  <p><%= pluralize(@tea.ratings.size, 'rating') %> with an average of <%= @tea.average_rating %>.</p>
+<% end %>
 
 <%= link_to 'Edit', edit_tea_path(@tea) %> |
 <%= link_to 'Back', teas_path %>

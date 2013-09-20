@@ -1,0 +1,13 @@
+<h1>Join a Tea Club</h1>
+
+<%= form_for(@membership) do |f| %>
+
+  <div class='field'>
+    <%= f.select :tea_club_id, options_from_collection_for_select(@tea_clubs, :id, :name) %>
+  </div>
+
+  <div class='actions'>
+    <%= f.submit 'Join' %>
+  </div>
+
+<% end %>

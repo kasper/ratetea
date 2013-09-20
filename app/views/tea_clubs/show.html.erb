@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<h1><%= @tea_club.name %></h1>
+
+<p>
+  <strong>Founded:</strong>
+  <%= @tea_club.founded %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @tea_club.city %>
+</p>
+
+<h2>Members</h2>
+
+<% unless @tea_club.members.empty? %>
+  <ul>
+    <% @tea_club.members.each do |member| %>
+      <li><%= link_to member.username, user_path(member) %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= link_to 'Edit', edit_tea_club_path(@tea_club) %> |
+<%= link_to 'Back', tea_clubs_path %>

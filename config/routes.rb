@@ -1,5 +1,7 @@
 Ratetea::Application.routes.draw do
 
+  resources :tea_clubs
+
   root 'breweries#index'
 
   resources :users, :teas, :breweries
@@ -21,6 +23,10 @@ Ratetea::Application.routes.draw do
   # post 'ratings' => 'ratings#create'
 
   resources :ratings, :only => [ :index, :new, :create, :destroy ]
+
+  # Memberships
+
+  resources :memberships, :only => [ :new, :create ]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

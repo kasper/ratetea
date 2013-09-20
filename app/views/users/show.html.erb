@@ -2,19 +2,31 @@
 
 <h1><%= @user.username %></h1>
 
-<p>
-  <% if @user.ratings.empty? %>
-    No ratings.
-  <% else %>
-    <%= pluralize(@user.ratings.size, 'rating') %> with an average of <%= @user.average_rating %>.
-  <% end %>
-</p>
+<h2>Ratings</h2>
 
-<ul>
-  <% @user.ratings.each do |rating| %>
-    <li><%= rating %> <%= link_to 'Destroy', rating, method: :delete, data: { confirm: 'Are you sure?' } %></li>
-  <% end %>
-</ul>
+<% if @user.ratings.empty? %>
+  <p>No ratings.</p>
+<% else %>
+  <p><%= pluralize(@user.ratings.size, 'rating') %> with an average of <%= @user.average_rating %>.</p>
+<% end %>
+
+<% unless @user.ratings.empty? %>
+  <ul>
+    <% @user.ratings.each do |rating| %>
+      <li><%= rating %> <%= link_to 'Destroy', rating, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<h2>Memberships</h2>
+
+<% unless @user.tea_clubs.empty? %>
+  <ul>
+    <% @user.tea_clubs.each do |tea_club| %>
+      <li><%= link_to tea_club.name, tea_club_path(tea_club) %></li>
+    <% end %>
+  </ul>
+<% end %>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
