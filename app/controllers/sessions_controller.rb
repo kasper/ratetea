@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
 
     if user.nil? or not user.authenticate(params[:password])
 
-      redirect_to(:back, :notice => "Username or password do not match.")
+      redirect_to(:back, :notice => 'Username or password do not match.')
 
     else
 
