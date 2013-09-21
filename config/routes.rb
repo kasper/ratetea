@@ -10,11 +10,12 @@ Ratetea::Application.routes.draw do
 
   resources :sessions, :only => [ :new, :create, :destroy ]
 
+  get 'login' => 'sessions#new'
+  delete 'logout' => 'sessions#destroy'
+
   # Users
 
   get 'signup' => 'users#new'
-  get 'login' => 'sessions#new'
-  delete 'logout' => 'sessions#destroy'
 
   # Ratings
 
