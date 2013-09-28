@@ -171,7 +171,8 @@ describe User do
 
       create_teas_with_varieties_and_ratings([ 'Kabusecha', 'Keemun', 'Gyokuro' ],
                                              [ 'Green tea', 'Black tea', 'Green tea' ],
-                                             [ 10, 40, 15 ], user)
+                                             [ 10, 40, 15 ],
+                                             user)
 
       expect(user.favourite_variety).to eq('Black tea')
 
@@ -209,7 +210,8 @@ describe User do
       create_teas_with_varieties_breweries_and_ratings([ 'Kabusecha', 'Keemun', 'Gyokuro' ],
                                                        [ 'Green tea', 'Black tea', 'Green tea' ],
                                                        [ 'The Tea Brewery', 'Japanese Brewery', 'Chinese Brewery' ],
-                                                       [ 10, 40, 15 ], user)
+                                                       [ 10, 40, 15 ],
+                                                       user)
 
       best = Brewery.find_by_name('Japanese Brewery')
 
