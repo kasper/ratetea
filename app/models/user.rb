@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :username
   validates_length_of :username, :minimum => 3, :maximum => 15
   validates_length_of :password, :minimum => 4
-  validates :password, :format => { :with => /\A(?=.*[:alpha:])(?=.*[0-9]).*\z/,
+  validates :password, :format => { :with => /\A(?=.*[[:alpha:]])(?=.*[0-9]).*\z/,
                                     :message => 'must contain at least letters and numbers.' }
 
   has_many :ratings, :dependent => :destroy
@@ -15,5 +15,26 @@ class User < ActiveRecord::Base
 
   has_many :memberships
   has_many :tea_clubs, :through => :memberships
+
+  def favourite_tea
+
+    return nil if ratings.empty?
+    ratings.sort_by { |rating| rating.score }.last.tea
+
+  end
+
+  def favourite_variety
+
+    return nil if ratings.empty?
+    favourite_tea.variety
+
+  end
+
+  def favourite_brewery
+
+    return nil if ratings.empty?
+    favourite_tea.brewery
+
+  end
 
 end

@@ -17,7 +17,7 @@ class RatingsController < ApplicationController
 
     @rating = Rating.new(rating_params)
 
-    if @rating.save
+    if !current_user.nil? and @rating.save
 
       current_user.ratings << @rating
       redirect_to(user_path(current_user))

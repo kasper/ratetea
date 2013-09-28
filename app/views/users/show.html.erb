@@ -12,6 +12,19 @@
 
   <p><%= pluralize(@user.ratings.size, 'rating') %> with an average of <%= @user.average_rating %>.</p>
 
+  <dl>
+
+    <dt><b>Favourite tea</b></dt>
+    <dd><%= @user.favourite_tea.name %></dd>
+
+    <dt><b>Favourite variety</b></dt>
+    <dd><%= @user.favourite_variety %></dd>
+
+    <dt><b>Favourite brewery</b></dt>
+    <dd><%= @user.favourite_brewery.name %></dd>
+
+  </dl>
+
   <ul>
     <% @user.ratings.each do |rating| %>
       <li>
