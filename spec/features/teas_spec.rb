@@ -4,9 +4,12 @@ describe 'Tea' do
 
   include TestHelper
 
+  let!(:user) { FactoryGirl.create :user }
   let!(:brewery) { FactoryGirl.create :brewery, :name => 'Japanese Brewery' }
 
   it 'can be added' do
+
+    log_in('kasper', 'repsak1')
 
     visit new_tea_path
 

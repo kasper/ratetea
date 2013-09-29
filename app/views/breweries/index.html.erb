@@ -7,8 +7,8 @@
     <tr>
       <th>Name</th>
       <th>Year</th>
-      <th></th>
-      <th></th>
+      <% unless current_user.nil? %><th></th><% end %>
+      <% if !current_user.nil? and current_user.admin? %><th></th><% end %>
     </tr>
   </thead>
 
@@ -17,8 +17,8 @@
       <tr>
         <td><%= link_to brewery.name, brewery %></td>
         <td><%= brewery.year %></td>
-        <td><%= link_to 'Edit', edit_brewery_path(brewery) %></td>
-        <td><%= link_to 'Destroy', brewery, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% unless current_user.nil? %><td><%= link_to 'Edit', edit_brewery_path(brewery) %></td><% end %>
+        <% if !current_user.nil? and current_user.admin? %><td><%= link_to 'Destroy', brewery, method: :delete, data: { confirm: 'Are you sure?' } %></td><% end %>
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +26,4 @@
 
 <br>
 
-<%= link_to 'New Brewery', new_brewery_path %>
+<%= link_to 'New Brewery', new_brewery_path unless current_user.nil? %>

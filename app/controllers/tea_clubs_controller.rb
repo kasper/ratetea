@@ -1,4 +1,6 @@
 class TeaClubsController < ApplicationController
+
+  before_filter :ensure_that_signed_in, :except => [ :index, :show ]
   before_action :set_tea_club, only: [:show, :edit, :update, :destroy]
 
   # GET /tea_clubs

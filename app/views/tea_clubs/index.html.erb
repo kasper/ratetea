@@ -6,21 +6,19 @@
       <th>Name</th>
       <th>Founded</th>
       <th>City</th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <% unless current_user.nil? %><th></th><% end %>
+      <% unless current_user.nil? %><th></th><% end %>
     </tr>
   </thead>
 
   <tbody>
     <% @tea_clubs.each do |tea_club| %>
       <tr>
-        <td><%= tea_club.name %></td>
+        <td><%= link_to tea_club.name, tea_club %></td>
         <td><%= tea_club.founded %></td>
         <td><%= tea_club.city %></td>
-        <td><%= link_to 'Show', tea_club %></td>
-        <td><%= link_to 'Edit', edit_tea_club_path(tea_club) %></td>
-        <td><%= link_to 'Destroy', tea_club, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% unless current_user.nil? %><td><%= link_to 'Edit', edit_tea_club_path(tea_club) %></td><% end %>
+        <% unless current_user.nil? %><td><%= link_to 'Destroy', tea_club, method: :delete, data: { confirm: 'Are you sure?' } %></td><% end %>
       </tr>
     <% end %>
   </tbody>
@@ -28,4 +26,4 @@
 
 <br>
 
-<%= link_to 'New Tea club', new_tea_club_path %>
+<%= link_to 'New Tea club', new_tea_club_path unless current_user.nil? %>

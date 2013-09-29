@@ -20,5 +20,5 @@
   <p><%= pluralize(@brewery.ratings.size, 'rating') %> with an average of <%= @brewery.average_rating %>.</p>
 <% end %>
 
-<%= link_to 'Edit', edit_brewery_path(@brewery) %> |
+<% unless current_user.nil? %><%= link_to 'Edit', edit_brewery_path(@brewery) %> |<% end %>
 <%= link_to 'Back', breweries_path %>
