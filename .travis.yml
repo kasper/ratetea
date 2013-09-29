@@ -15,7 +15,7 @@ deploy:
 
     api_key:
 
-        secure: WJYjFbQ8lk/Kn4ThnNSAtrkYXiX6gnSrLNvdQf5RUST25ogS+imIH9p8B5B7\niJx/BO7sRo6d0GgjHCsA4pXj9XSyAAIZdQxnSh2TL7kzh0+yUWjahJJN8qcV\nsqUEX2Loe8ZdCbgQ6xdSo7nTVUuA2tPylfm9+fxb1vm5qdkB++w=
+        secure: UjGXE/3p3Dure+PbyUpN3ild/NmCrrX/as833X5pnLL5K9EnWzrMrhDCOEQm\nfi2ufgYyOqT7TRBx5tRqs8DqYBE2Y63yG0dh5VBIQju8y5FE812NxnhQ9Ydf\n8tc5RM5OiByLVm8xWDlxnjxuERAlWCS8EZiestREatVB4QPscqo=
 
     run: rake db:migrate
 
