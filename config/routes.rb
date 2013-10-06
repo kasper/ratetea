@@ -29,6 +29,11 @@ Ratetea::Application.routes.draw do
 
   resources :memberships, :only => [ :new, :create ]
 
+  # Places
+
+  resources :places, :only => [ :index, :show ]
+  post 'places' => 'places#search'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -1,0 +1,25 @@
+<% unless @place.nil? %>
+
+  <h1><%= @place.name %></h1>
+
+  <dl>
+
+    <dt><b>Address</b></dt>
+    <dd><%= @place.street %>, <%= @place.zip %> <%= @place.city %></dd>
+
+    <% if @score != 0 %>
+
+      <dt><b>Score</b></dt>
+      <dd><%= @score %></dd>
+
+    <% end %>
+
+  </dl>
+
+  <iframe src='<%= @place.blogmap %>' style='width: 500px; height: 300px; border: 0;'></iframe>
+
+<% else %>
+
+  <p>No place found.</p>
+
+<% end %>

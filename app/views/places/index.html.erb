@@ -1,0 +1,39 @@
+<h1>Search tea places</h1>
+
+<%= form_tag places_path do %>
+
+  <div class='field'>
+    City<br>
+    <%= text_field_tag :city, params[:city] %>
+  </div>
+
+  <div class='actions'>
+    <%= submit_tag 'Search' %>
+  </div>
+
+<% end %>
+
+<p id='notice'><%= notice %></p>
+
+<% if @places %>
+
+  <table>
+    <thead>
+      <% Place.rendered_fields.each do |field| %>
+        <th><%= field.capitalize %></th>
+      <% end %>
+    </thead>
+    <% @places.each do |place| %>
+      <tr>
+        <% Place.rendered_fields.each do |field| %>
+            <% if field.to_s == ('name') %>
+              <td><%= link_to place.send(field), place_path(place.id) %></td>
+            <% else %>
+              <td><%= place.send(field) %></td>
+            <% end %>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+
+<% end %>

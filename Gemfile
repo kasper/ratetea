@@ -3,16 +3,21 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
 
-group :development, :test do
+group :development do
 
   # Use sqlite3 as the development database for Active Record
   gem 'sqlite3'
+
+end
+
+group :test do
 
   gem 'rspec-rails', '~> 2.0'
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'launchy'
   gem 'simplecov', :require => false
+  gem 'webmock'
 
 end
 
@@ -24,6 +29,9 @@ group :production do
   gem 'pg'
 
 end
+
+gem 'rails-settings-cached'
+gem 'httparty'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
