@@ -23,17 +23,55 @@ class User < ActiveRecord::Base
 
   end
 
+  def rated_varieties
+
+    ratings.map { |rating| rating.tea.variety }.uniq
+
+  end
+
+  def variety_rating_average(variety)
+
+    variety_ratings = ratings.select { |rating| rating.tea.variety == variety }
+    return 0 if variety_ratings.empty?
+    variety_ratings.inject(0.0) { |sum, r| sum + r.score } / variety_ratings.count
+
+  end
+
   def favourite_variety
 
     return nil if ratings.empty?
-    favourite_tea.variety
+
+    variety_rating_pairs = rated_varieties.inject([]) do |pairs, variety|
+      pairs << [variety, variety_rating_average(variety)]
+    end
+
+    variety_rating_pairs.sort_by { |s| s.last }.last.first
+
+  end
+
+  def rated_breweries
+
+    ratings.map { |rating| rating.tea.brewery }.uniq
+
+  end
+
+  def brewery_rating_average(brewery)
+
+    brewery_ratings = ratings.select { |rating| rating.tea.brewery == brewery }
+    return 0 if brewery_ratings.empty?
+    brewery_ratings.inject(0.0) { |sum, r| sum + r.score } / brewery_ratings.count
 
   end
 
   def favourite_brewery
 
     return nil if ratings.empty?
-    favourite_tea.brewery
+
+    brewery_rating_pairs = rated_breweries.inject([]) do |pairs, brewery|
+      pairs << [brewery, brewery_rating_average(brewery)]
+    end
+
+    brewery_rating_pairs.sort_by { |s| s.last }.last.first
 
   end
 
