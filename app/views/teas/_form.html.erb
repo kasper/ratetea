@@ -16,8 +16,8 @@
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :variety %><br>
-    <%= f.select :variety, options_for_select(@varieties) %>
+    <%= f.label :variety_id %><br>
+    <%= f.select :variety_id, options_from_collection_for_select(@varieties, :id, :name) %>
   </div>
   <div class="field">
     <%= f.label :brewery_id %><br>

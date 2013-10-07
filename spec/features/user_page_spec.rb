@@ -10,7 +10,7 @@ describe 'User page' do
 
     before :each do
 
-      tea = FactoryGirl.create(:tea, :name => 'Kabusecha', :variety => 'Black tea')
+      tea = FactoryGirl.create(:tea, :name => 'Kabusecha', :variety => FactoryGirl.create(:variety, :name => 'Black tea'))
 
       @rating = FactoryGirl.create(:rating, :score => 10, :tea => tea, :user => user)
       @rating2 = FactoryGirl.create(:rating, :score => 15, :tea => tea, :user => user)

@@ -20,6 +20,12 @@ FactoryGirl.define do
 
   end
 
+  factory :variety do
+
+    name 'Green tea'
+
+  end
+
   factory :brewery do
 
     name 'The Tea Brewery'
@@ -30,8 +36,8 @@ FactoryGirl.define do
   factory :tea do
 
     name 'Gyokuro'
+    variety
     brewery
-    variety 'Green tea'
 
   end
 

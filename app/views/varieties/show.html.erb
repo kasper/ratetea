@@ -1,0 +1,23 @@
+<p id='notice'><%= notice %></p>
+
+<h1><%= @variety.name %></h1>
+
+<p>
+  <strong>Description:</strong>
+  <%= @variety.description %>
+</p>
+
+<% unless @variety.teas.empty? %>
+
+<h2>Teas</h2>
+
+  <ul>
+    <% @variety.teas.each do |tea| %>
+      <li><%= link_to tea, tea %></li>
+    <% end %>
+  </ul>
+
+<% end %>
+
+<% unless current_user.nil? %><%= link_to 'Edit', edit_variety_path(@variety) %> |<% end %>
+<%= link_to 'Back', varieties_path %>

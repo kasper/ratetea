@@ -26,7 +26,10 @@ def create_teas_with_varieties_and_ratings(names, varieties, scores, user)
 
   names.each_with_index do |name, index|
 
-    tea = FactoryGirl.create(:tea, :name => name, :variety => varieties[index], :brewery => brewery)
+    variety = Variety.find_by_name(varieties[index])
+    variety = FactoryGirl.create(:variety, :name => varieties[index]) if variety.nil?
+
+    tea = FactoryGirl.create(:tea, :name => name, :variety => variety, :brewery => brewery)
     FactoryGirl.create(:rating, :score => scores[index], :tea => tea, :user => user)
 
   end
@@ -39,7 +42,10 @@ def create_teas_with_varieties_breweries_and_ratings(names, varieties, breweries
 
     brewery = FactoryGirl.create(:brewery, :name => breweries[index])
 
-    tea = FactoryGirl.create(:tea, :name => name, :variety => varieties[index], :brewery => brewery)
+    variety = Variety.find_by_name(varieties[index])
+    variety = FactoryGirl.create(:variety, :name => varieties[index]) if variety.nil?
+
+    tea = FactoryGirl.create(:tea, :name => name, :variety => variety, :brewery => brewery)
     FactoryGirl.create(:rating, :score => scores[index], :tea => tea, :user => user)
 
   end
@@ -163,7 +169,7 @@ describe User do
       tea = FactoryGirl.create(:tea)
       FactoryGirl.create(:rating, :tea => tea, :user => user)
 
-      expect(user.favourite_variety).to eq('Green tea')
+      expect(user.favourite_variety.name).to eq('Green tea')
 
     end
 
@@ -174,7 +180,7 @@ describe User do
                                              [ 10, 40, 15 ],
                                              user)
 
-      expect(user.favourite_variety).to eq('Black tea')
+      expect(user.favourite_variety.name).to eq('Black tea')
 
     end
 

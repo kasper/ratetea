@@ -1,5 +1,7 @@
 Ratetea::Application.routes.draw do
 
+  resources :varieties
+
   resources :tea_clubs
 
   root 'breweries#index'

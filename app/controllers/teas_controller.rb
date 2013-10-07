@@ -23,7 +23,7 @@ class TeasController < ApplicationController
 
     @tea = Tea.new
     @breweries = Brewery.all
-    @varieties = varieties
+    @varieties = Variety.all
 
   end
 
@@ -31,7 +31,7 @@ class TeasController < ApplicationController
   def edit
 
     @breweries = Brewery.all
-    @varieties = varieties
+    @varieties = Variety.all
 
   end
 
@@ -41,7 +41,7 @@ class TeasController < ApplicationController
 
     @tea = Tea.new(tea_params)
     @breweries = Brewery.all
-    @varieties = varieties
+    @varieties = Variety.all
 
     respond_to do |format|
       if @tea.save
@@ -60,7 +60,7 @@ class TeasController < ApplicationController
   def update
 
     @breweries = Brewery.all
-    @varieties = varieties
+    @varieties = Variety.all
 
     respond_to do |format|
       if @tea.update(tea_params)
@@ -86,12 +86,6 @@ class TeasController < ApplicationController
 
   private
 
-    def varieties
-
-      [ 'Black tea', 'Green tea', 'Oolong tea', 'White tea' ]
-
-    end
-
     # Use callbacks to share common setup or constraints between actions.
     def set_tea
       @tea = Tea.find(params[:id])
@@ -99,7 +93,7 @@ class TeasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tea_params
-      params.require(:tea).permit(:name, :variety, :brewery_id)
+      params.require(:tea).permit(:name, :variety_id, :brewery_id)
     end
 
 end
