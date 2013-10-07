@@ -20,7 +20,7 @@
 
   <div class='field'>
     <%= f.label :tea_id %><br>
-    <%= f.select :tea_id, options_from_collection_for_select(@teas, :id, :to_s) %>
+    <%= f.select :tea_id, options_from_collection_for_select(@teas, :id, :to_s, :selected => @rating.tea_id) %>
   </div>
 
   <div class='field'>

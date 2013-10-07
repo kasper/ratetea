@@ -12,6 +12,9 @@ class TeaClubsController < ApplicationController
   # GET /tea_clubs/1
   # GET /tea_clubs/1.json
   def show
+
+    @membership = Membership.new
+
   end
 
   # GET /tea_clubs/new

@@ -12,6 +12,10 @@ class TeasController < ApplicationController
   # GET /teas/1
   # GET /teas/1.json
   def show
+
+    @rating = Rating.new
+    @rating.tea = @tea
+
   end
 
   # GET /teas/new

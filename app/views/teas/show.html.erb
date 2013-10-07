@@ -21,5 +21,17 @@
   <p><%= pluralize(@tea.ratings.size, 'rating') %> with an average of <%= @tea.average_rating %>.</p>
 <% end %>
 
+<% unless current_user.nil? %>
+
+  <%= form_for(@rating) do |f| %>
+
+    <%= f.hidden_field :tea_id %>
+    Score: <%= f.number_field :score %>
+    <%= f.submit 'Rate' %>
+
+  <% end %>
+
+<% end %>
+
 <% unless current_user.nil? %><%= link_to 'Edit', edit_tea_path(@tea) %> |<% end %>
 <%= link_to 'Back', teas_path %>
