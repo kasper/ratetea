@@ -19,5 +19,12 @@
 
 <% end %>
 
-<% unless current_user.nil? %><%= link_to 'Edit', edit_variety_path(@variety) %> |<% end %>
-<%= link_to 'Back', varieties_path %>
+<% unless current_user.nil? %>
+
+  <%= link_to 'Edit', edit_variety_path(@variety), :class => 'btn' %>
+
+  <% if current_user.admin? %>
+    <%= link_to 'Destroy', @variety, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn' %>
+  <% end %>
+
+<% end %>

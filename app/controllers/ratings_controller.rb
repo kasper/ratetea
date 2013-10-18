@@ -4,7 +4,16 @@ class RatingsController < ApplicationController
 
   def index
 
-    @ratings = Rating.all
+    unless fragment_exist?('ratings')
+
+      @ratings = Rating.all
+      @top_teas = Tea.top(3)
+      @top_breweries = Brewery.top(3)
+      @top_varieties = Variety.top(3)
+      @top_active_users = User.top(3)
+      @recent_ratings = Rating.recent
+
+    end
 
   end
 

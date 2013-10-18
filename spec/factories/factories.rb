@@ -30,6 +30,7 @@ FactoryGirl.define do
 
     name 'The Tea Brewery'
     year 2013
+    active true
 
   end
 

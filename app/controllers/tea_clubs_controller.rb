@@ -29,16 +29,25 @@ class TeaClubsController < ApplicationController
   # POST /tea_clubs
   # POST /tea_clubs.json
   def create
+
     @tea_club = TeaClub.new(tea_club_params)
 
     respond_to do |format|
+
       if @tea_club.save
+
+        membership = Membership.new(:tea_club_id => @tea_club.id, :confirmed => true)
+        current_user.memberships << membership
+        membership.save
+
         format.html { redirect_to @tea_club, notice: 'Tea club was successfully created.' }
         format.json { render action: 'show', status: :created, location: @tea_club }
+
       else
         format.html { render action: 'new' }
         format.json { render json: @tea_club.errors, status: :unprocessable_entity }
       end
+
     end
   end
 

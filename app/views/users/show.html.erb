@@ -10,7 +10,7 @@
 
   <h2>Ratings</h2>
 
-  <p><%= pluralize(@user.ratings.size, 'rating') %> with an average of <%= @user.average_rating %>.</p>
+  <p><%= pluralize(@user.ratings.size, 'rating') %> with an average of <%= round(@user.average_rating) %>.</p>
 
   <dl>
 
@@ -29,7 +29,7 @@
     <% @user.ratings.each do |rating| %>
       <li>
 
-        <%= rating %>
+        <%= round(rating) %>
 
         <% if currently_signed_in?(@user) %>
           <%= link_to 'Destroy', rating, method: :delete, data: { confirm: 'Are you sure?' } %>
@@ -41,21 +41,31 @@
 
 <% end %>
 
-<% unless @user.tea_clubs.empty? %>
+<% unless @user.confirmed_memberships.empty? %>
 
   <h2>Memberships</h2>
 
   <ul>
-    <% @user.tea_clubs.each do |tea_club| %>
-      <li><%= link_to tea_club.name, tea_club_path(tea_club) %></li>
+    <% @user.confirmed_memberships.each do |membership| %>
+      <li><%= link_to membership.tea_club.name, tea_club_path(membership.tea_club) %></li>
+    <% end %>
+  </ul>
+
+<% end %>
+
+<% unless @user.applied_memberships.empty? %>
+
+  <h2>Applied Memberships</h2>
+
+  <ul>
+    <% @user.applied_memberships.each do |membership| %>
+      <li><%= link_to membership.tea_club.name, tea_club_path(membership.tea_club) %></li>
     <% end %>
   </ul>
 
 <% end %>
 
 <% if currently_signed_in?(@user) %>
-  <%= link_to 'Edit', edit_user_path(@user) %> |
-  <%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' } %> |
+  <%= link_to 'Edit', edit_user_path(@user), :class => 'btn' %>
+  <%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn' %>
 <% end %>
-
-<%= link_to 'Back', users_path %>

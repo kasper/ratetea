@@ -8,7 +8,7 @@
   </div>
 
   <div class='actions'>
-    <%= submit_tag 'Search' %>
+    <%= submit_tag 'Search', :class => 'btn' %>
   </div>
 
 <% end %>
@@ -17,7 +17,7 @@
 
 <% if @places %>
 
-  <table>
+  <table class='table table-hover'>
     <thead>
       <% Place.rendered_fields.each do |field| %>
         <th><%= field.capitalize %></th>
@@ -28,6 +28,8 @@
         <% Place.rendered_fields.each do |field| %>
             <% if field.to_s == ('name') %>
               <td><%= link_to place.send(field), place_path(place.id) %></td>
+            <% elsif field.to_s == 'overall' %>
+              <td><%= round(place.send(field)) %></td>
             <% else %>
               <td><%= place.send(field) %></td>
             <% end %>

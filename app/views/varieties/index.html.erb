@@ -1,12 +1,10 @@
 <h1>Listing varieties</h1>
 
-<table>
+<table class='table table-hover'>
   <thead>
     <tr>
       <th>Name</th>
       <th>Description</th>
-      <% unless current_user.nil? %><th></th><% end %>
-      <% if !current_user.nil? and current_user.admin? %><th></th><% end %>
     </tr>
   </thead>
 
@@ -15,8 +13,6 @@
       <tr>
         <td><%= link_to variety.name, variety %></td>
         <td><%= variety.description.truncate(100) %></td>
-        <% unless current_user.nil? %><td><%= link_to 'Edit', edit_variety_path(variety) %></td><% end %>
-        <% if !current_user.nil? and current_user.admin? %><td><%= link_to 'Destroy', variety, method: :delete, data: { confirm: 'Are you sure?' } %></td><% end %>
       </tr>
     <% end %>
   </tbody>
@@ -24,4 +20,4 @@
 
 <br>
 
-<%= link_to 'New Variety', new_variety_path unless current_user.nil? %>
+<%= link_to 'New Variety', new_variety_path, :class => 'btn' unless current_user.nil? %>

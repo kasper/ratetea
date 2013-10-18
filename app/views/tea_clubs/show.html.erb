@@ -12,31 +12,45 @@
   <%= @tea_club.city %>
 </p>
 
-<% unless @tea_club.members.empty? %>
+<% unless @tea_club.confirmed_memberships.empty? %>
 
   <h2>Members</h2>
 
   <ul>
-    <% @tea_club.members.each do |member| %>
-      <li><%= link_to member.username, user_path(member) %></li>
+    <% @tea_club.confirmed_memberships.each do |membership| %>
+      <li><%= link_to membership.user.username, user_path(membership.user) %></li>
     <% end %>
   </ul>
 
 <% end %>
 
-<% unless current_user.nil? %>
+<% unless @tea_club.applied_memberships.empty? %>
+
+  <h2>Applications</h2>
+
+  <ul>
+    <% @tea_club.applied_memberships.each do |membership| %>
+      <li><%= link_to membership.user.username, user_path(membership.user) %> <%= link_to 'Confirm', confirm_membership_path(membership.id), :method => :post if @tea_club.confirmed_member?(current_user) %></li>
+    <% end %>
+  </ul>
+
+<% end %>
+
+<% unless current_user.nil? or current_user.tea_clubs.include?(@tea_club) %>
 
   <%= form_for(@membership) do |f| %>
 
     <%= f.hidden_field :tea_club_id, :value => @tea_club.id %>
 
     <div class='actions'>
-      <%= f.submit 'Join' %>
+      <%= f.submit 'Join', :class => 'btn' %>
     </div>
 
   <% end %>
 
 <% end %>
 
-<%= link_to 'Edit', edit_tea_club_path(@tea_club) %> |
-<%= link_to 'Back', tea_clubs_path %>
+<% unless current_user.nil? %>
+  <%= link_to 'Edit', edit_tea_club_path(@tea_club), :class => 'btn' %>
+  <%= link_to 'Destroy', @tea_club, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn' %>
+<% end %>

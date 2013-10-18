@@ -18,6 +18,8 @@ group :test do
   gem 'launchy'
   gem 'simplecov', :require => false
   gem 'webmock'
+  gem 'selenium-webdriver'
+  gem 'database_cleaner', '< 1.1.0'
 
 end
 
@@ -32,6 +34,10 @@ end
 
 gem 'rails-settings-cached'
 gem 'httparty'
+gem 'therubyracer'
+gem 'less-rails'
+gem 'twitter-bootstrap-rails'
+gem 'actionpack-action_caching'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'

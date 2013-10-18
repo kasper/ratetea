@@ -1,29 +1,27 @@
 <h1>Listing teas</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Variety</th>
-      <th>Brewery</th>
-      <% unless current_user.nil? %><th></th><% end %>
-      <% unless current_user.nil? %><th></th><% end %>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @teas.each do |tea| %>
+<% cache("teas-#{@order}", :skip_digest => true) do %>
+  <table class='table table-hover'>
+    <thead>
       <tr>
-        <td><%= link_to tea.name, tea %></td>
-        <td><%= link_to tea.variety, tea.variety %></td>
-        <td><%= link_to tea.brewery.name, tea.brewery %></td>
-        <% unless current_user.nil? %><td><%= link_to 'Edit', edit_tea_path(tea) %></td><% end %>
-        <% unless current_user.nil? %><td><%= link_to 'Destroy', tea, method: :delete, data: { confirm: 'Are you sure?' } %></td><% end %>
+        <th><%= link_to 'Name', teas_path(:order => 'name') %></th>
+        <th><%= link_to 'Variety', teas_path(:order => 'variety') %></th>
+        <th><%= link_to 'Brewery', teas_path(:order => 'brewery') %></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% @teas.each do |tea| %>
+        <tr>
+          <td><%= link_to tea.name, tea %></td>
+          <td><%= link_to tea.variety, tea.variety %></td>
+          <td><%= link_to tea.brewery.name, tea.brewery %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
 
 <br>
 
-<%= link_to 'New Tea', new_tea_path unless current_user.nil? %>
+<%= link_to 'New Tea', new_tea_path, :class => 'btn' unless current_user.nil? %>

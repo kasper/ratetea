@@ -10,11 +10,18 @@ class User < ActiveRecord::Base
   validates :password, :format => { :with => /\A(?=.*[[:alpha:]])(?=.*[0-9]).*\z/,
                                     :message => 'must contain at least letters and numbers.' }
 
-  has_many :ratings, :dependent => :destroy
+  has_many :ratings, :include => [ :tea => [ :variety, :brewery ] ], :dependent => :destroy
   has_many :teas, :through => :ratings
 
   has_many :memberships
   has_many :tea_clubs, :through => :memberships
+
+  def self.top(n)
+
+    sorted_by_rating_in_desc_order = User.all.sort_by{ |user| -user.ratings.count }
+    sorted_by_rating_in_desc_order.first(n)
+
+  end
 
   def favourite_tea
 
@@ -72,6 +79,18 @@ class User < ActiveRecord::Base
     end
 
     brewery_rating_pairs.sort_by { |s| s.last }.last.first
+
+  end
+
+  def confirmed_memberships
+
+    memberships.where(:confirmed => true)
+
+  end
+
+  def applied_memberships
+
+    memberships.where(:confirmed => [ nil, false ])
 
   end
 

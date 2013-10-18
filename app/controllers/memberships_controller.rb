@@ -25,6 +25,23 @@ class MembershipsController < ApplicationController
 
   end
 
+  def confirm
+
+    membership = Membership.find(params[:id])
+    membership.confirmed = true
+
+    if membership.tea_club.confirmed_member?(current_user)
+
+      membership.save
+
+      return redirect_to :back, :notice => 'Membership confirmed.'
+
+    end
+
+    redirect_to :back
+
+  end
+
   private
 
     def membership_params

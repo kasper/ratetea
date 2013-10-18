@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1><%= @brewery.name %></h1>
+<h1><%= @brewery.name %> <% if not @brewery.active %><span class='label'>retired</span><% end %></h1>
 
 <i>Established in <%= @brewery.year %></i>
 
@@ -17,8 +17,17 @@
 <% if @brewery.ratings.empty? %>
   <p>No ratings.</p>
 <% else %>
-  <p><%= pluralize(@brewery.ratings.size, 'rating') %> with an average of <%= @brewery.average_rating %>.</p>
+  <p><%= pluralize(@brewery.ratings.size, 'rating') %> with an average of <%= round(@brewery.average_rating) %>.</p>
 <% end %>
 
-<% unless current_user.nil? %><%= link_to 'Edit', edit_brewery_path(@brewery) %> |<% end %>
-<%= link_to 'Back', breweries_path %>
+<% unless current_user.nil? %>
+
+  <%= link_to 'Toggle active', toggle_active_brewery_path(@brewery.id), :method => :post, :class => 'btn' %>
+
+  <%= link_to 'Edit', edit_brewery_path(@brewery), :class => 'btn' %>
+
+  <% if current_user.admin? %>
+    <%= link_to 'Destroy', @brewery, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn' %>
+  <% end %>
+
+<% end %>

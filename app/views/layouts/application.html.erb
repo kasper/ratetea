@@ -2,36 +2,72 @@
 <html>
 <head>
   <title>Ratetea</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<nav>
+<div class='navbar navbar-fixed-top'>
+  <div class='navbar-inner'>
+    <div class='container'>
 
-  <ul>
-    <li><%= link_to 'Breweries', breweries_path %></li>
-    <li><%= link_to 'Varieties', varieties_path %></li>
-    <li><%= link_to 'Teas', teas_path %></li>
-    <li><%= link_to 'Ratings', ratings_path %></li>
-    <li><%= link_to 'Users', users_path %></li>
-    <li><%= link_to 'Tea Clubs', tea_clubs_path %></li>
-    <li><%= link_to 'Places', places_path %></li>
-  </ul>
+      <%= link_to 'Ratetea', :root, :class => 'brand' %>
 
-  <ul>
-    <% if current_user.nil? %><li><%= link_to 'Login', login_path %></li><% end %>
-    <% if current_user.nil? %><li><%= link_to 'Signup', signup_path %></li><% end %>
-    <% unless current_user.nil? %><li><%= link_to current_user.username, current_user %></li><% end %>
-    <% unless current_user.nil? %><li><%= link_to 'Rate a Tea', new_rating_path %></li><% end %>
-    <% unless current_user.nil? %><li><%= link_to 'Join a Tea Club', new_membership_path %></li><% end %>
-    <% unless current_user.nil? %><li><%= link_to 'Logout', logout_path, method: :delete %></li><% end %>
-  </ul>
+      <ul class='nav'>
+        <li><%= link_to 'Breweries', breweries_path %></li>
+        <li><%= link_to 'Varieties', varieties_path %></li>
+        <li><%= link_to 'Teas', teas_path %></li>
+        <li><%= link_to 'Ratings', ratings_path %></li>
+        <li><%= link_to 'Users', users_path %></li>
+        <li><%= link_to 'Tea Clubs', tea_clubs_path %></li>
+        <li><%= link_to 'Places', places_path %></li>
+      </ul>
 
-</nav>
+      <ul class='nav pull-right'>
 
-<%= yield %>
+        <li claas='divider-vertical'></li>
+
+        <% if current_user.nil? %>
+
+          <li><%= link_to 'Login', login_path %></li>
+          <li><%= link_to 'Signup', signup_path %></li>
+
+        <% end %>
+
+        <% unless current_user.nil? %>
+
+          <li class='dropdown'>
+
+            <a href='#' class='dropdown-toggle' data-toggle='dropdown'><%= current_user.username %> <b class='caret'></b></a>
+
+            <ul class='dropdown-menu'>
+              <li><%= link_to 'Profile', current_user %></li>
+              <li><%= link_to 'Rate a Tea', new_rating_path %></li>
+              <li><%= link_to 'Join a Tea Club', new_membership_path %></li>
+              <li class='divider'></li>
+              <li><%= link_to 'Logout', logout_path, method: :delete %></li>
+            </ul>
+          </li>
+
+        <% end %>
+
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+<div class='container'>
+  <div class='row'>
+    <div class='span9'>
+      <%= yield %>
+    </div>
+    <div class='span3'>
+      <%= image_tag 'tea-pot.jpg' %>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>

@@ -9,6 +9,13 @@ class Tea < ActiveRecord::Base
   has_many :ratings, :dependent => :destroy
   has_many :raters, :through => :ratings, :source => :user
 
+  def self.top(n)
+
+    sorted_by_rating_in_desc_order = Tea.all.sort_by{ |tea| -tea.average_rating }
+    sorted_by_rating_in_desc_order.first(n)
+
+  end
+
   def to_s
 
     "#{name} (#{brewery.name})"

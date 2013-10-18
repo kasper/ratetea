@@ -19,6 +19,16 @@ Ratetea::Application.routes.draw do
 
   get 'signup' => 'users#new'
 
+  # Breweries
+
+  resources :breweries do
+    post 'toggle_active', :on => :member
+  end
+
+  # Teas
+
+  get 'tealist' => 'teas#list'
+
   # Ratings
 
   # get 'ratings' => 'ratings#index'
@@ -30,6 +40,10 @@ Ratetea::Application.routes.draw do
   # Memberships
 
   resources :memberships, :only => [ :new, :create ]
+
+  resources :memberships do
+    post 'confirm', :on => :member
+  end
 
   # Places
 

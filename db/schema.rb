@@ -11,13 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131007104248) do
+ActiveRecord::Schema.define(version: 20131018104333) do
 
   create_table "breweries", force: true do |t|
     t.string   "name"
     t.integer  "year"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "active"
   end
 
   create_table "memberships", force: true do |t|
@@ -25,6 +26,7 @@ ActiveRecord::Schema.define(version: 20131007104248) do
     t.integer  "tea_club_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "confirmed"
   end
 
   create_table "ratings", force: true do |t|
@@ -69,6 +71,8 @@ ActiveRecord::Schema.define(version: 20131007104248) do
     t.string   "password_digest"
     t.boolean  "admin"
   end
+
+  add_index "users", ["username"], name: "index_users_on_username"
 
   create_table "varieties", force: true do |t|
     t.string   "name"
